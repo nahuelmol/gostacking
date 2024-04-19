@@ -10,6 +10,7 @@ import (
     "molinahuel/qgis/back/py"
     "molinahuel/qgis/back/mobile"
     "molinahuel/qgis/back/front"
+    "molinahuel/qgis/back/stack"
 )
 
 
@@ -19,11 +20,12 @@ func main(){
         fmt.Println("error loading environment")
     }
     mux := http.NewServeMux()
-    mux.HandleFunc("wsmobile/", mobile.MobileSocket)
-    mux.HandleFunc("wspyclient/", py.PySocket)
+    mux.HandleFunc("/wsmobile/", mobile.MobileSocket)
+    mux.HandleFunc("/wspyclient/", py.PySocket)
 
+    mux.HandleFunc("/home/", frontend.Home)
 
-    mux.HandleFunc("home/", frontend.Home)
+    stack.Init()
     
     port := ":" + os.Getenv("PORT")
     host := os.Getenv("HOST")

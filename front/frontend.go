@@ -7,12 +7,16 @@ import (
 )
 
 type DataTypes struct {
-    xlocation int32
-    ylocation int32
+    Xlocation int32
+    Ylocation int32
+}
+
+func (dt DataTypes) GetXY() (int32, int32) {
+    return dt.Xlocation, dt.Ylocation
 }
 
 func Home(w http.ResponseWriter, r *http.Request) {
-    tmpl, err := template.ParseFiles("index.html")
+    tmpl, err := template.ParseFiles("templates/index.html")
     if err != nil {
         http.Error(w, err.Error(), http.StatusInternalServerError)
         fmt.Println("there is an error parsing html to template")
@@ -20,8 +24,8 @@ func Home(w http.ResponseWriter, r *http.Request) {
     }
 
     ctx := DataTypes {
-        xlocation: 33,
-        ylocation: 44,
+        Xlocation: 33,
+        Ylocation: 44,
     }
 
     err = tmpl.Execute(w, ctx)

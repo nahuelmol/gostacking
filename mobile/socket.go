@@ -29,16 +29,23 @@ func MobileSocket(w http.ResponseWriter, r *http.Request) {
         }
         switch msgType {
         case websocket.TextMessage:
-            json_string := string(p)
             var body map[string]interface{}
-            json.Unmarshal([]byte(json_string), &body)
+            json.Unmarshal(p, &body)
 
-            x, xexists := body["xlocation"].(int32)
-            y, yexists := body["ylocation"].(int32)
+            _, xexists := body["xlocation"]
+            _, yexists := body["ylocation"]
             if xexists && yexists {
                 var location stack.Location 
-                location.SetXY(x,y)
+
+                x, y, err := CleanXY(body)
+                if err != nil {
+                    fmt.Println(err)
+                }
+                location.SetXY(x, y)
                 stack.MEGASTACK.Push(&location)
+            } else {
+                message := "xlocation and ylocation fields must exists"
+                conn.WriteMessage(websocket.TextMessage, []byte(message))
             }
 
         case websocket.BinaryMessage:
@@ -48,8 +55,13 @@ func MobileSocket(w http.ResponseWriter, r *http.Request) {
         default:
             fmt.Println("messag is not binary neither text")
         }
-    }
 
+        fmt.Println("current head")
+        fmt.Println(stack.MEGASTACK.Gethead())
+        
+        fmt.Println("lenght MEGASTACK")
+        fmt.Println(stack.MEGASTACK.Getlength())
+    }
 }
 
 
