@@ -23,6 +23,7 @@ func (l *Location) SetXY(x, y int32) {
 type MegaStack struct {
     head *Location
     next *Location
+    tail *Location
 
     length uint32
     locations []*Location
@@ -45,7 +46,6 @@ func (ms *MegaStack) Getlength() uint32 {
 }
 
 func CreateMegaStack() *MegaStack {
-    //var locations []*Location
     return &MegaStack {
         head: nil,
         next: nil,

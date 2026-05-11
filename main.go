@@ -28,7 +28,7 @@ func main(){
     port := ":" + os.Getenv("PORT")
     host := os.Getenv("HOST")
 
-    fmt.Printf("listening on %s:%s", host, port)
+    fmt.Printf("Listening on %s:%s", host, port)
     http.ListenAndServe(port, mux)
 }
 

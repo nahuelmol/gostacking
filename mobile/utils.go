@@ -29,3 +29,4 @@ func CleanXY(body map[string]interface{}) (int32, int32, error){
 
     return ix, iy, nil
 }
+

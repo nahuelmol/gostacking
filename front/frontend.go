@@ -4,6 +4,7 @@ import (
     "net/http"
     "html/template"
     "fmt"
+    "time"
 )
 
 type DataTypes struct {
@@ -19,7 +20,7 @@ func Home(w http.ResponseWriter, r *http.Request) {
     tmpl, err := template.ParseFiles("templates/index.html")
     if err != nil {
         http.Error(w, err.Error(), http.StatusInternalServerError)
-        fmt.Println("there is an error parsing html to template")
+        fmt.Println("There is an error parsing the html")
         return
     }
 
@@ -28,10 +29,13 @@ func Home(w http.ResponseWriter, r *http.Request) {
         Ylocation: 44,
     }
 
-    err = tmpl.Execute(w, ctx)
-    if err != nil {
-        http.Error(w, err.Error(), http.StatusInternalServerError)
-        fmt.Println("error executing the template")
-        return
-    }
+    for i := 0; i < 5; i++ {
+	time.Sleep(2 * time.Second)
+	err = tmpl.Execute(w, ctx)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		fmt.Println("Error executing the template")
+		return
+	}
+	}
 }
