@@ -13,17 +13,15 @@ import (
     "molinahuel/qgis/back/stack"
 )
 
-
 func main(){
     err := godotenv.Load()
     if err != nil {
         fmt.Println("error loading environment")
     }
     mux := http.NewServeMux()
-    mux.HandleFunc("/wsmobile/", mobile.MobileSocket)
-    mux.HandleFunc("/wspyclient/", py.PySocket)
-
-    mux.HandleFunc("/home/", frontend.Home)
+    mux.HandleFunc("/wsmobile/", 	mobile.MobileSocket)
+    mux.HandleFunc("/wspyclient/", 	py.PySocket)
+    mux.HandleFunc("/home/", 		frontend.Home)
 
     stack.Init()
     

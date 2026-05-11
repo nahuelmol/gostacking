@@ -32,7 +32,7 @@ func PySocket(w http.ResponseWriter, r *http.Request) {
             var body map[string]interface{}
             json.Unmarshal([]byte(json_string), &body)
 
-            _, is := body["gethead"] //pyclient wants head
+            _, is := body["gethead"]
             if is {
                 location := stack.MEGASTACK.Gethead()
                 x := string(location.X())
@@ -42,7 +42,6 @@ func PySocket(w http.ResponseWriter, r *http.Request) {
             } else {
                 fmt.Println("there is not data in the stack")
             }
-
 
         case websocket.BinaryMessage:
             buffer := make([]byte, 1024)

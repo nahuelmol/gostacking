@@ -63,6 +63,3 @@ func MobileSocket(w http.ResponseWriter, r *http.Request) {
         fmt.Println(stack.MEGASTACK.Getlength())
     }
 }
-
-
-

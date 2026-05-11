@@ -34,5 +34,4 @@ func Home(w http.ResponseWriter, r *http.Request) {
         fmt.Println("error executing the template")
         return
     }
-
 }
