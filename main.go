@@ -22,6 +22,7 @@ func main(){
     mux.HandleFunc("/wsmobile/", 	mobile.MobileSocket)
     mux.HandleFunc("/wspyclient/", 	py.PySocket)
     mux.HandleFunc("/home/", 		frontend.Home)
+    mux.HandleFunc("/client/", 		frontend.Client)
 
     stack.Init()
     

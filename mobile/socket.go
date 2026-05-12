@@ -2,6 +2,7 @@ package mobile
 
 import (
     "fmt"
+    "log"
     "encoding/json"
     "net/http"
 
@@ -18,9 +19,9 @@ func MobileSocket(w http.ResponseWriter, r *http.Request) {
     conn, err := UPGRADER.Upgrade(w, r, nil)
     if err != nil {
         fmt.Println("cannot upgrade\n")
+	log.Println(err)
     }
     defer conn.Close()
-    //make the user to send his postion throuhg an specfic ws://
 
     for {
         msgType, p, err := conn.ReadMessage()

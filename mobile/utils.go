@@ -6,7 +6,6 @@ import (
 )
 
 func CleanXY(body map[string]interface{}) (int32, int32, error){
-
     xlocation, isx := body["xlocation"]
     ylocation, isy := body["ylocation"]
     
