@@ -6,11 +6,6 @@ import (
     "fmt"
 
     "github.com/joho/godotenv"
-
-    "molinahuel/qgis/back/py"
-    "molinahuel/qgis/back/mobile"
-    "molinahuel/qgis/back/front"
-    "molinahuel/qgis/back/stack"
 )
 
 func main(){
@@ -19,12 +14,6 @@ func main(){
         fmt.Println("error loading environment")
     }
     mux := http.NewServeMux()
-    mux.HandleFunc("/wsmobile/", 	mobile.MobileSocket)
-    mux.HandleFunc("/wspyclient/", 	py.PySocket)
-    mux.HandleFunc("/home/", 		frontend.Home)
-    mux.HandleFunc("/client/", 		frontend.Client)
-
-    stack.Init()
     
     port := ":" + os.Getenv("PORT")
     host := os.Getenv("HOST")
